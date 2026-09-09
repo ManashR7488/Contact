@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feature Fabricator — Team Portfolio</title>
+    <meta name="description" content="Meet the team behind Feature Fabricator. Connect with us at the Hackathon Awareness Program.">
+
+    <!-- Tailwind CSS v3 CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Outfit', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50:  '#f0e7ff',
+                            100: '#d4bcff',
+                            200: '#b78fff',
+                            300: '#9a62ff',
+                            400: '#7d35ff',
+                            500: '#6b1fff',
+                            600: '#5a0de6',
+                            700: '#4600b3',
+                            800: '#330080',
+                            900: '#1f004d',
+                        },
+                        surface: {
+                            900: '#0a0a1a',
+                            800: '#111128',
+                            700: '#1a1a3a',
+                            600: '#24244d',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-up': 'slideUp 0.6s ease-out forwards',
+                        'fade-in': 'fadeIn 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        glow: {
+                            from: { boxShadow: '0 0 20px rgba(107, 31, 255, 0.3)' },
+                            to: { boxShadow: '0 0 40px rgba(107, 31, 255, 0.6), 0 0 80px rgba(107, 31, 255, 0.2)' },
+                        },
+                        slideUp: {
+                            from: { opacity: '0', transform: 'translateY(30px)' },
+                            to: { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeIn: {
+                            from: { opacity: '0' },
+                            to: { opacity: '1' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a1a; }
+        ::-webkit-scrollbar-thumb { background: #6b1fff; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #7d35ff; }
+
+        /* Glassmorphism card */
+        .glass-card {
+            background: rgba(26, 26, 58, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(107, 31, 255, 0.15);
+        }
+
+        .glass-card:hover {
+            background: rgba(36, 36, 77, 0.7);
+            border-color: rgba(107, 31, 255, 0.4);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(107, 31, 255, 0.2), 0 0 40px rgba(107, 31, 255, 0.1);
+        }
+
+        /* Avatar gradient ring */
+        .avatar-ring {
+            background: conic-gradient(from 0deg, #6b1fff, #00d4ff, #ff6bcb, #6b1fff);
+            padding: 3px;
+        }
+
+        /* Hero overlay */
+        .hero-overlay {
+            background: linear-gradient(180deg, rgba(10, 10, 26, 0.4) 0%, rgba(10, 10, 26, 0.85) 60%, rgba(10, 10, 26, 1) 100%);
+        }
+
+        /* Phone button pulse */
+        .phone-btn:hover .phone-icon {
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Stagger animation delays */
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
+
+        /* Animated background particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.15;
+        }
+
+        /* Leader card special glow */
+        .leader-card {
+            border: 1px solid rgba(255, 215, 0, 0.3) !important;
+        }
+        .leader-card:hover {
+            border-color: rgba(255, 215, 0, 0.6) !important;
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.15), 0 0 40px rgba(255, 215, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-surface-900 text-white font-sans min-h-screen overflow-x-hidden">
+
+    <!-- Floating Background Particles -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        <div class="particle w-64 h-64 bg-brand-500 top-[10%] left-[5%] animate-float" style="filter: blur(80px);"></div>
+        <div class="particle w-96 h-96 bg-cyan-500 top-[50%] right-[0%] animate-float" style="filter: blur(120px); animation-delay: 2s;"></div>
+        <div class="particle w-72 h-72 bg-pink-500 bottom-[10%] left-[40%] animate-float" style="filter: blur(100px); animation-delay: 4s;"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative w-full min-h-[70vh] flex items-center justify-center overflow-hidden">
+        <!-- Hero Background Image -->
+        <img src="hero_banner.png" alt="" class="absolute inset-0 w-full h-full object-cover" aria-hidden="true">
+        <!-- Overlay -->
+        <div class="hero-overlay absolute inset-0"></div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 text-center px-6 animate-fade-in">
+            <!-- Team Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-6">
+                <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                <span class="text-sm font-medium text-gray-300 tracking-wide uppercase">Hackathon Awareness Program 2026</span>
+            </div>
+
+            <h1 class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-4">
+                <span class="bg-gradient-to-r from-brand-300 via-cyan-300 to-pink-300 bg-clip-text text-transparent">
+                    Feature
+                </span>
+                <br>
+                <span class="text-white">Fabricator</span>
+            </h1>
+
+            <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mt-4 leading-relaxed">
+                We build ideas into reality. Meet our team — reach out anytime, we're here to help you 
+                <span class="text-brand-300 font-semibold">innovate</span> and 
+                <span class="text-cyan-300 font-semibold">create</span>.
+            </p>
+
+            <!-- Scroll Indicator -->
+            <div class="mt-12 animate-bounce">
+                <svg class="w-6 h-6 mx-auto text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                </svg>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section Divider -->
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-brand-500 to-transparent"></div>
+
+    <!-- Team Section -->
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <!-- Section Header -->
+        <div class="text-center mb-16 opacity-0 animate-slide-up">
+            <p class="text-brand-400 font-semibold uppercase tracking-widest text-sm mb-3">Our Team</p>
+            <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white">
+                The Minds Behind the Magic
+            </h2>
+            <p class="text-gray-400 mt-4 max-w-xl mx-auto text-lg">
+                Got questions about hackathons? Want to brainstorm ideas? Tap on any card to call us directly.
+            </p>
+        </div>
+
+        <!-- Leader Card (Full Width) -->
+        <div class="mb-12 flex justify-center opacity-0 animate-slide-up stagger-1">
+            <div class="glass-card leader-card rounded-2xl p-8 max-w-lg w-full transition-all duration-500 cursor-default group">
+                <!-- Leader Badge -->
+                <div class="flex justify-center mb-5">
+                    <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest bg-gradient-to-r from-yellow-500/20 to-amber-500/20 text-yellow-300 border border-yellow-500/30">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                        Team Leader
+                    </span>
+                </div>
+
+                <!-- Avatar -->
+                <div class="flex justify-center mb-5">
+                    <div class="avatar-ring rounded-full">
+                        <div class="w-24 h-24 rounded-full bg-gradient-to-br from-yellow-400 via-amber-500 to-orange-600 flex items-center justify-center">
+                            <span class="font-display text-3xl font-bold text-white">MR</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info -->
+                <h3 class="font-display text-2xl font-bold text-center text-white group-hover:text-yellow-300 transition-colors duration-300">
+                    Manash Ranjan Mahanand
+                </h3>
+                <p class="text-gray-400 text-center mt-1 text-sm">Visionary • Strategist • Builder</p>
+
+                <!-- Phone Button -->
+                <div class="mt-6 flex justify-center">
+                    <a href="tel:+917008552247" class="phone-btn inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-gradient-to-r from-yellow-500/20 to-amber-500/20 border border-yellow-500/30 hover:border-yellow-400/60 text-yellow-300 hover:text-yellow-200 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/10">
+                        <svg class="w-5 h-5 phone-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                        <span class="font-semibold tracking-wide">7008552247</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="flex items-center gap-4 mb-12 opacity-0 animate-slide-up stagger-2">
+            <div class="flex-1 h-px bg-gradient-to-r from-transparent to-brand-500/30"></div>
+            <span class="text-brand-400 text-sm font-semibold uppercase tracking-widest">Team Members</span>
+            <div class="flex-1 h-px bg-gradient-to-l from-transparent to-brand-500/30"></div>
+        </div>
+
+        <!-- Members Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+
+            <!-- Member 1: Reshma -->
+            <div class="glass-card rounded-2xl p-7 transition-all duration-500 cursor-default group opacity-0 animate-slide-up stagger-2">
+                <div class="flex justify-center mb-5">
+                    <div class="avatar-ring rounded-full">
+                        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-pink-400 via-rose-500 to-red-500 flex items-center justify-center">
+                            <span class="font-display text-2xl font-bold text-white">RK</span>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="font-display text-xl font-bold text-center text-white group-hover:text-pink-300 transition-colors duration-300">
+                    Reshma Kumari Nahak
+                </h3>
+                <p class="text-gray-400 text-center mt-1 text-sm">Team Member</p>
+                <div class="mt-5 flex justify-center">
+                    <a href="tel:+918328948687" class="phone-btn inline-flex items-center gap-3 px-5 py-2.5 rounded-xl bg-pink-500/10 border border-pink-500/20 hover:border-pink-400/50 text-pink-300 hover:text-pink-200 transition-all duration-300 hover:shadow-lg hover:shadow-pink-500/10">
+                        <svg class="w-4 h-4 phone-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                        <span class="font-semibold">8328948687</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Member 2: Akash -->
+            <div class="glass-card rounded-2xl p-7 transition-all duration-500 cursor-default group opacity-0 animate-slide-up stagger-3">
+                <div class="flex justify-center mb-5">
+                    <div class="avatar-ring rounded-full">
+                        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-500 flex items-center justify-center">
+                            <span class="font-display text-2xl font-bold text-white">AD</span>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="font-display text-xl font-bold text-center text-white group-hover:text-cyan-300 transition-colors duration-300">
+                    Akash Das
+                </h3>
+                <p class="text-gray-400 text-center mt-1 text-sm">Team Member</p>
+                <div class="mt-5 flex justify-center">
+                    <a href="tel:+919040177437" class="phone-btn inline-flex items-center gap-3 px-5 py-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/20 hover:border-cyan-400/50 text-cyan-300 hover:text-cyan-200 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10">
+                        <svg class="w-4 h-4 phone-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                        <span class="font-semibold">9040177437</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Member 3: Amit -->
+            <div class="glass-card rounded-2xl p-7 transition-all duration-500 cursor-default group opacity-0 animate-slide-up stagger-4">
+                <div class="flex justify-center mb-5">
+                    <div class="avatar-ring rounded-full">
+                        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-emerald-400 via-green-500 to-teal-500 flex items-center justify-center">
+                            <span class="font-display text-2xl font-bold text-white">AK</span>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="font-display text-xl font-bold text-center text-white group-hover:text-emerald-300 transition-colors duration-300">
+                    Amit Kumar Pradhan
+                </h3>
+                <p class="text-gray-400 text-center mt-1 text-sm">Team Member</p>
+                <div class="mt-5 flex justify-center">
+                    <a href="tel:+918260461325" class="phone-btn inline-flex items-center gap-3 px-5 py-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 hover:border-emerald-400/50 text-emerald-300 hover:text-emerald-200 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/10">
+                        <svg class="w-4 h-4 phone-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                        <span class="font-semibold">8260461325</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Member 4: Simran -->
+            <div class="glass-card rounded-2xl p-7 transition-all duration-500 cursor-default group opacity-0 animate-slide-up stagger-5">
+                <div class="flex justify-center mb-5">
+                    <div class="avatar-ring rounded-full">
+                        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-violet-400 via-purple-500 to-fuchsia-500 flex items-center justify-center">
+                            <span class="font-display text-2xl font-bold text-white">SN</span>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="font-display text-xl font-bold text-center text-white group-hover:text-violet-300 transition-colors duration-300">
+                    Simran Nayak
+                </h3>
+                <p class="text-gray-400 text-center mt-1 text-sm">Team Member</p>
+                <div class="mt-5 flex justify-center">
+                    <a href="tel:+917327028899" class="phone-btn inline-flex items-center gap-3 px-5 py-2.5 rounded-xl bg-violet-500/10 border border-violet-500/20 hover:border-violet-400/50 text-violet-300 hover:text-violet-200 transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/10">
+                        <svg class="w-4 h-4 phone-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                        <span class="font-semibold">7327028899</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Member 5: Biswajit -->
+            <div class="glass-card rounded-2xl p-7 transition-all duration-500 cursor-default group opacity-0 animate-slide-up stagger-6">
+                <div class="flex justify-center mb-5">
+                    <div class="avatar-ring rounded-full">
+                        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 flex items-center justify-center">
+                            <span class="font-display text-2xl font-bold text-white">BR</span>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="font-display text-xl font-bold text-center text-white group-hover:text-orange-300 transition-colors duration-300">
+                    Biswajit Ray
+                </h3>
+                <p class="text-gray-400 text-center mt-1 text-sm">Team Member</p>
+                <div class="mt-5 flex justify-center">
+                    <a href="tel:+918118023750" class="phone-btn inline-flex items-center gap-3 px-5 py-2.5 rounded-xl bg-orange-500/10 border border-orange-500/20 hover:border-orange-400/50 text-orange-300 hover:text-orange-200 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/10">
+                        <svg class="w-4 h-4 phone-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                        <span class="font-semibold">8118023750</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- CTA Section -->
+    <section class="relative z-10 py-16">
+        <div class="max-w-3xl mx-auto px-6 text-center">
+            <div class="glass-card rounded-3xl p-10 animate-glow">
+                <div class="text-4xl mb-4">🚀</div>
+                <h3 class="font-display text-2xl sm:text-3xl font-bold text-white mb-3">
+                    Ready to Build Something Amazing?
+                </h3>
+                <p class="text-gray-400 text-lg mb-6">
+                    Whether you need guidance on hackathon projects, tech stacks, or team building — we've got your back.
+                </p>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <span class="px-4 py-2 rounded-full text-sm font-medium bg-brand-500/20 text-brand-300 border border-brand-500/30">Web Dev</span>
+                    <span class="px-4 py-2 rounded-full text-sm font-medium bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">App Dev</span>
+                    <span class="px-4 py-2 rounded-full text-sm font-medium bg-pink-500/20 text-pink-300 border border-pink-500/30">UI/UX</span>
+                    <span class="px-4 py-2 rounded-full text-sm font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">AI/ML</span>
+                    <span class="px-4 py-2 rounded-full text-sm font-medium bg-amber-500/20 text-amber-300 border border-amber-500/30">Problem Solving</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-white/5 py-8">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <span class="font-display font-bold text-lg bg-gradient-to-r from-brand-300 to-cyan-300 bg-clip-text text-transparent">
+                    Feature Fabricator
+                </span>
+                <span class="text-gray-600">•</span>
+                <span class="text-gray-500 text-sm">Hackathon Awareness Program 2026</span>
+            </div>
+            <p class="text-gray-600 text-sm">
+                Built with 💜 for innovation
+            </p>
+        </div>
+    </footer>
+
+    <!-- Intersection Observer for scroll animations -->
+    <script>
+        // Trigger animations when elements come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate-slide-up').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
